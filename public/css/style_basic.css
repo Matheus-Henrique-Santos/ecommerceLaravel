@@ -1,22 +1,61 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
-.topo{
+body {
     background-color: gray;
-    display: flex;
+}
 
+/* Navbar */
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 173, 173);
+}
+
+.logo {
+    display: flex;
 }
 
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+
 }
 
 nav ul {
     display: flex;
     gap: 30px;
 }
+
+/* Navbar */
+
+/* Principal */
+
+/* Header*/
+.header {
+    position: absolute;
+    background-image: url("../img/header/produto-header.svg");
+    width: 100%;
+    height: 90%;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.square {
+    position: relative;
+    display: none;
+    background-color: azure;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Principal */

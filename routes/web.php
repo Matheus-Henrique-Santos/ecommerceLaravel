@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\FornecedorController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::get('/shop', [ShopController::class,'shop'])->name('site.shop');
 Route::get('/sobre-nos', [SobreNosController::class,'sobreNos'])->name('site.sobre-nos');
 
 Route::get('/contato', [ContatoController::class,'contato'])->name('site.contato');
+
+Route::get('/cart', [CartController::class,'cart'])->name('site.cart');
 
 // Route::get('/login', function(){ return 'login'; })->name('site.login');
 
