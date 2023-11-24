@@ -1,14 +1,23 @@
 <div class="topo">
 
     <div class="logo">
-        <img src="img/logo.png">
+        <img src="img/navbar/logo.svg">
     </div>
 
-    <div class="menu">
+    <nav>
         <ul>
-            <li><a href="{{ route('site.index') }}">Principal</a></li>
-            <li><a href="{{ route('site.sobre-nos') }}">Sobre Nós</a></li>
-            <li><a href="{{ route('site.contato') }}">Contato</a></li>
+            <li>
+                <a href="{{ route('site.index') }}">Home</a>
+            </li>
+            <li>
+                <a href="{{ route('site.shop') }}">Shop</a>
+            </li>
+            <li>
+                <a href="{{ route('site.sobre-nos') }}">Sobre </a>
+            </li>
+            <li>
+                <a href="{{ route('site.contato') }}">Contato</a>
+            </li>
         </ul>
-    </div>
+    </nav>
 </div>

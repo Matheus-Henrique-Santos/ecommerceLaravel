@@ -7,7 +7,7 @@
     </head>
 
     <body>
-       @include('site.layouts.navbar')
+       @include('site/layouts/navbar')
         @yield('conteudo')
     </body>
 </html>
