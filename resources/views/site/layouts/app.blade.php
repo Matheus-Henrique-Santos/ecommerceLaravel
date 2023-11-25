@@ -4,6 +4,7 @@
         <title>Furniro @yield('title')</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="{{ asset('css/style_basic.css') }}">
+        <link rel="shortcut icon" href="{{asset ('img/favicon.ico')}}" type="image/x-icon">
     </head>
 
     <body>
