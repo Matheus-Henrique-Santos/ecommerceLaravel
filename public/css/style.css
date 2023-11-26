@@ -137,12 +137,27 @@ nav .icons-nav span {
 }
 
 footer {
+  width: 1200px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: start;
 }
-footer .color-gray-tex p {
+footer .color-gray-text {
+  padding: 15px;
+}
+footer .color-gray-text p {
   color: #9F9F9F;
 }
-footer .color-gray-tex h1 {
-  margin-top: 20px;
+footer .color-gray-text h1 {
+  margin-bottom: 40px;
+}
+footer .color-gray-text .options-footer {
+  color: #000;
+  padding-bottom: 10px;
+}
+footer .color-gray-text .footer-title {
+  margin-bottom: 40px;
 }/*# sourceMappingURL=style.css.map */
