@@ -20,6 +20,6 @@
     </div>
     <div class="color-gray-text">
         <p class="footer-title">Newsletter</p>  
-        <input type="text" placeholder="Enter Your Email Address" />
+        <input class="input-Newsletter" type="text" placeholder="Enter Your Email Address" />
     </div>
 </footer>
