@@ -53,7 +53,28 @@
 
             </div>
         </div>
-        <div></div>
+
+        <div class="section-product">
+            <div class="product-box">
+                <div>
+                    <img src="img/main/product/product-1.svg" alt="product-1">
+                </div>
+                <div>
+                    <div>
+                        <h1>Syltherine</h1>
+                    </div>
+                    <div>
+                        <h3>Stylish cafe chair</h3>
+                    </div>
+                    <div>
+                        <p>Rp 2.500.000</p>
+                        <p>Rp 3.500.000</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
         <div></div>
         <div></div>
     </div>
