@@ -7,10 +7,26 @@
     </div>
     <div class="color-gray-text">
         <p class="footer-title">Links</p>
-        <p class="options-footer">Home</p>  
-        <p class="options-footer">Shop</p>     
-        <p class="options-footer">About</p>     
-        <p class="options-footer">Contact</p>     
+        <p class="options-footer">
+            <a href="{{ route('site.index') }}">
+                Home
+            </a>
+        </p>  
+        <p class="options-footer">
+            <a class="options-footer" href="{{ route('site.shop') }}">
+                Shop
+            </a>
+        </p>     
+        <p class="options-footer">
+            <a class="options-footer" href="{{ route('site.sobre-nos') }}">
+                Sobre 
+            </a>
+        </p>     
+        <p class="options-footer">
+            <a class="options-footer" href="{{ route('site.contato') }}">
+                Contato
+            </a>
+        </p>     
     </div>
     <div class="color-gray-text">
         <p class="footer-title">Help</p>
