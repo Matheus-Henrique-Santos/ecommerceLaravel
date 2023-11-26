@@ -134,4 +134,15 @@ nav .icons-nav span {
 }
 .main-home .section-variedades-home h1 {
   font-size: 3rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+footer .color-gray-tex p {
+  color: #9F9F9F;
+}
+footer .color-gray-tex h1 {
+  margin-top: 20px;
 }/*# sourceMappingURL=style.css.map */
