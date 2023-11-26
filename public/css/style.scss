@@ -202,22 +202,16 @@ nav {
 // footer
 
 footer {
-    width: 1200px;
     display: flex;
-<<<<<<< HEAD
     justify-content: space-between;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
     align-items: start;
     .color-gray-text {
-        .input-Newsletter
-        padding: 15px;
-=======
-    justify-content: center;
-    flex-direction: column;
-    .color-gray-text {
->>>>>>> b3ad8ad835b9e15b3db96a50b94472e46b45cbd1
+        .input-Newsletter {
+            padding: 15px;
+        }
         p {
             color: #9F9F9F;
         }

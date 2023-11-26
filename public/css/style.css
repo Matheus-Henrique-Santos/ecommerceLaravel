@@ -170,28 +170,20 @@ nav .icons-nav span {
 }
 
 footer {
-  width: 1200px;
   display: flex;
-<<<<<<< HEAD
   justify-content: space-between;
   width: 60%;
   margin-left: auto;
   margin-right: auto;
   align-items: start;
 }
-footer .color-gray-text {
+footer .color-gray-text .input-Newsletter {
   padding: 15px;
 }
-=======
-  justify-content: center;
-  flex-direction: column;
-}
->>>>>>> b3ad8ad835b9e15b3db96a50b94472e46b45cbd1
 footer .color-gray-text p {
   color: #9F9F9F;
 }
 footer .color-gray-text h1 {
-<<<<<<< HEAD
   margin-bottom: 40px;
 }
 footer .color-gray-text .options-footer {
@@ -200,7 +192,4 @@ footer .color-gray-text .options-footer {
 }
 footer .color-gray-text .footer-title {
   margin-bottom: 40px;
-=======
-  margin-top: 20px;
->>>>>>> b3ad8ad835b9e15b3db96a50b94472e46b45cbd1
 }/*# sourceMappingURL=style.css.map */
