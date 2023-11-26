@@ -22,25 +22,35 @@
             </div>
 
             <div class="square-home-btn">
-                <button class="">Comprar Agora</button>
+                <button class="btn">Comprar Agora</button>
             </div>
         </div>
     </div>
 
     <div class="main-home">
-        <div class="section-variedades-home">
-            <div>
+        <div class="section-variety-home">
+            <div class="section-title-home">
                 <h2>
-                    Navegue pela Variedade
+                    Navegue pelas Variedades
                 </h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
             </div>
-            <div class="section-variedades-home">
-                <img src="" alt="">
-                <img src="" alt="">
-                <img src="" alt="">
+            <div class="section-img-home">
+                <div class="section-img-bloco">
+                    <img src="img/main/home/img106.svg" alt="img1">
+                    <h3>Sala de jantar</h3>
+                </div>
+                <div class="section-img-bloco">
+                    <img src="img/main/home/img100.svg" alt="img2">
+                    <h3>Sala de estar</h3>
+                </div>
+                <div class="section-img-bloco">
+                    <img src="img/main/home/img101.svg" alt="img3">
+                    <h3>Quarto</h3>
+                </div>
+
             </div>
         </div>
         <div></div>

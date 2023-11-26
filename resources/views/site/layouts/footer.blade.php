@@ -1,8 +1,13 @@
 <footer>
     <div class="color-gray-text">
         <h1>Funiro.</h1>
+<<<<<<< HEAD
         <p>400 University Drive Suite 200 Coral</p>
         <p>Gables,</p>     
+=======
+        <p>400 University Drive Suite 200</p>
+        <p>Coral Gables,</p>
+>>>>>>> b3ad8ad835b9e15b3db96a50b94472e46b45cbd1
         <p>FL 33134 USA</p>
     </div>
     <div class="color-gray-text">
