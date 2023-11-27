@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body h1,
@@ -117,18 +118,19 @@ nav .icons-nav span {
 .header-home .square-home {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   background: #fff3e3;
+  margin-top: 40px;
   margin-right: 80px;
-  width: 640px;
-  height: 443px;
+  max-width: 640px;
+  height: auto;
+  padding-bottom: 30px;
   display: flex;
   border-radius: 10px;
 }
 .header-home .square-home .square-home-content {
   display: flex;
   flex-direction: column;
-  margin: 50px 40px 30px 40px;
+  margin: 45px 40px 30px 40px;
   padding: 20px 0px 0px 0px;
   font-family: var(--font-content);
 }
@@ -140,12 +142,14 @@ nav .icons-nav span {
 .header-home .square-home .square-home-content h1 {
   color: #b88e2f;
   font-family: var(--font-content);
-  margin: -5px 0px 20px 0px;
-  font-size: 3.25rem;
-  line-height: 60px;
+  font-size: 2.25rem;
+  line-height: 40px;
+  overflow-y: hidden;
 }
 .header-home .square-home .square-home-content p {
-  font-size: 1.125rem;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1rem;
   line-height: 24px;
 }
 .header-home .square-home .square-home-btn {
@@ -157,8 +161,8 @@ nav .icons-nav span {
   border-radius: 5px;
   color: white;
   font-weight: bold;
-  padding: 25px 72px;
-  font-size: 1rem;
+  padding: 25px 62px;
+  font-size: 0.8rem;
   text-transform: uppercase;
   transition: 0.2s;
 }
@@ -220,7 +224,7 @@ nav .icons-nav span {
 footer {
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   align-items: start;
@@ -240,4 +244,22 @@ footer .color-gray-text .options-footer {
 }
 footer .color-gray-text .footer-title {
   margin-bottom: 40px;
+}
+
+@media (max-width: 1024px) {
+  .header-home .square-home {
+    margin-top: 50px;
+    gap: 0px;
+  }
+  .header-home .square-home .square-home-content {
+    padding: 0px;
+  }
+  .header-home .square-home .square-home-content .title-home {
+    display: flex;
+    flex-direction: column;
+    gap: -30;
+  }
+  .header-home .square-home .square-home-content p {
+    font-size: 1rem;
+  }
 }/*# sourceMappingURL=style.css.map */

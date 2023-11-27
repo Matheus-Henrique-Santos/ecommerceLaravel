@@ -8,10 +8,17 @@
                 <div>
                     <h3>Nova Chegada</h3>
                 </div>
-                <div>
-                    <h1>
-                        Descubra nossa nova coleção
-                    </h1>
+                <div class="title-home">
+                    <div>
+                        <h1>
+                            Descubra nossa
+                        </h1>
+                    </div>
+                    <div>
+                        <h1>
+                            nova coleção
+                        </h1>
+                    </div>
                 </div>
                 <div>
                     <p>

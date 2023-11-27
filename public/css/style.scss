@@ -1,11 +1,14 @@
 //use a EXTENSAO LIVE SERVER COMPILER SCSS
 
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&display=swap");
 
 @mixin sizeView {
     width: 1200px;
 }
+
+
 
 :root {
     --cor-primaria: #b88e2f;
@@ -20,6 +23,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 body {
@@ -134,11 +138,13 @@ nav {
     .square-home {
         display: flex;
         flex-direction: column;
-        gap: 20px;
         background: #fff3e3;
+        margin-top: 40px;
         margin-right: 80px;
-        width: 640px;
-        height: 443px;
+        max-width: 640px;
+
+        height: auto;
+        padding-bottom: 30px;
         display: flex;
         border-radius: 10px;
 
@@ -146,7 +152,7 @@ nav {
             display: flex;
             flex-direction: column;
             //top left bottom right
-            margin: 50px 40px 30px 40px;
+            margin: 45px 40px 30px 40px;
             padding: 20px 0px 0px 00px;
             font-family: var(--font-content);
             h3 {
@@ -157,12 +163,14 @@ nav {
             h1 {
                 color: #b88e2f;
                 font-family: var(--font-content);
-                margin: -5px 0px 20px 0px;
-                font-size: 3.25rem;
-                line-height: 60px;
+                font-size: 2.25rem;
+                line-height: 40px;
+                overflow-y: hidden;
             }
             p {
-                font-size: 1.125rem;
+                width: 100%;
+                margin-top: 20px;
+                font-size: 1rem;
                 line-height: 24px;
             }
         }
@@ -175,8 +183,8 @@ nav {
                 border-radius: 5px;
                 color: white;
                 font-weight: bold;
-                padding: 25px 72px;
-                font-size: 1rem;
+                padding: 25px 62px;
+                font-size: 0.8rem;
                 text-transform: uppercase;
 
                 transition: 0.2s;
@@ -249,7 +257,7 @@ nav {
 footer {
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     align-items: start;
@@ -271,4 +279,27 @@ footer {
             margin-bottom: 40px;
         }
     }
+}
+
+@media (max-width: 1024px) {
+    
+    .header-home {
+        .square-home{
+            margin-top: 50px;
+            gap: 0px;
+            .square-home-content{
+                padding: 0px;
+                .title-home{
+                    display: flex;
+                    flex-direction: column;
+                    gap: -30;
+                }
+                p{
+                    font-size: 1rem;
+                }
+
+            }
+        }
+    }
+
 }

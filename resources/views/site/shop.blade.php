@@ -1,5 +1,5 @@
 @extends('site.layouts.app')
 
 @section('conteudo')
-<h1>oolala</h1>
+<h1>shop</h1>
 @endsection

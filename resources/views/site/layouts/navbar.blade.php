@@ -2,7 +2,7 @@
 
     <div class="logo">
         <img src="img/navbar/logo.svg">
-        <h1>Furniro</h1>
+        <h1>Furniture</h1>
     </div>
 
     <div class="links">
