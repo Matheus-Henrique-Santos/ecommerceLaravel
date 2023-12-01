@@ -5,7 +5,7 @@ use App\Http\Controllers\ContatoController;
 // use App\Http\Controllers\FornecedorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrincipalController;
-use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SobreNosController;
 // use App\Http\Controllers\TesteController;
@@ -25,7 +25,7 @@ Route::get('/', [PrincipalController::class,'principal'])->name('site.index');
 
 Route::get('/shop', [ShopController::class,'shop'])->name('site.shop');
 
-Route::get('/product', [ProductController::class,'newProduct'])->name('site.product');
+// Route::get('/product', [ProductController::class,'newProduct'])->name('site.product');
 
 Route::get('/sobre-nos', [SobreNosController::class,'sobreNos'])->name('site.sobre-nos');
 

@@ -61,23 +61,32 @@
             </div>
         </div>
 
-        <div class="section-product">
-            @if (!empty($produtos))
-                @foreach ($produtos as $produto)
-                    <div class="product-box">
-                        <img src="{{ asset($produto['imagem']) }}" alt="{{ $produto['nome'] }}">
-                        <div class="product-description">
-                            <h1>{{ $produto['nome'] }}</h1>
-                            <h3>{{ $produto['descricao'] }}</h3>
-                            <span>Com Desconto: R$ {{ $produto['valor_com_desconto'] }}</span>
-                            <span>Sem Desconto: R$ {{ $produto['valor_sem_desconto'] }}</span>
-                        </div>
-                    </div>
-                @endforeach
+        {{-- <div class="section-product-main">
+
+            <h1>Outros Produtos</h1>
+
+            <div class="section-product">
+                @if (!empty($produtos))
+                    @include('site.components.product')
+                @else
+                    <p>Nenhum produto disponível.</p>
+                @endif
+            </div>
+        </div> --}}
+        <div class="section-product-main">
+            <h1>Outros Produtos</h1>
+        
+            @if ($mostrarProdutos)
+                <div class="section-product">
+                    @if (!empty($produtos))
+                        @include('site.components.product')
+                    @else
+                        <p>Nenhum produto disponível.</p>
+                    @endif
+                </div>
             @else
-                <p>Nenhum produto disponível.</p>
+                <p>A seção de produtos não está sendo exibida. Nenhum produto disponível.</p>
             @endif
         </div>
-
     </div>
 @endsection
