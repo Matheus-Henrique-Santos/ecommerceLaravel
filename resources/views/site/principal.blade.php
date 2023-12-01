@@ -64,9 +64,7 @@
         <div class="section-product">
             @if (!empty($produtos))
                 @foreach ($produtos as $produto)
-                
-                    @include('site.components.product')
-                    {{-- <div class="product-box">
+                    <div class="product-box">
                         <img src="{{ asset($produto['imagem']) }}" alt="{{ $produto['nome'] }}">
                         <div class="product-description">
                             <h1>{{ $produto['nome'] }}</h1>
@@ -74,7 +72,7 @@
                             <span>Com Desconto: R$ {{ $produto['valor_com_desconto'] }}</span>
                             <span>Sem Desconto: R$ {{ $produto['valor_sem_desconto'] }}</span>
                         </div>
-                    </div> --}}
+                    </div>
                 @endforeach
             @else
                 <p>Nenhum produto disponível.</p>
