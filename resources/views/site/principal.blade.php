@@ -62,27 +62,24 @@
         </div>
 
         <div class="section-product">
-            <div class="product-box">
-                <div>
-                    <img src="img/main/product/product-1.svg" alt="product-1">
-                </div>
-                <div>
-                    <div>
-                        <h1>Syltherine</h1>
-                    </div>
-                    <div>
-                        <h3>Stylish cafe chair</h3>
-                    </div>
-                    <div>
-                        <p>Rp 2.500.000</p>
-                        <p>Rp 3.500.000</p>
-                    </div>
-                </div>
-
-            </div>
-
+            @if (!empty($produtos))
+                @foreach ($produtos as $produto)
+                
+                    @include('site.components.product')
+                    {{-- <div class="product-box">
+                        <img src="{{ asset($produto['imagem']) }}" alt="{{ $produto['nome'] }}">
+                        <div class="product-description">
+                            <h1>{{ $produto['nome'] }}</h1>
+                            <h3>{{ $produto['descricao'] }}</h3>
+                            <span>Com Desconto: R$ {{ $produto['valor_com_desconto'] }}</span>
+                            <span>Sem Desconto: R$ {{ $produto['valor_sem_desconto'] }}</span>
+                        </div>
+                    </div> --}}
+                @endforeach
+            @else
+                <p>Nenhum produto disponível.</p>
+            @endif
         </div>
-        <div></div>
-        <div></div>
+
     </div>
 @endsection
