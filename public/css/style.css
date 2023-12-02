@@ -35,6 +35,7 @@ nav {
   align-items: center;
   background-color: white;
   box-shadow: 0px 3px 39px rgba(0, 0, 0, 0.24);
+  z-index: 3;
 }
 nav .logo {
   margin: 10px;
@@ -255,7 +256,7 @@ nav .icons-nav span {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 60%;
+  margin-top: 55%;
   gap: 20px;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links {
@@ -263,10 +264,18 @@ nav .icons-nav span {
   justify-content: center;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul {
+  border: 1px solid white;
   display: flex;
   justify-content: center;
   flex-direction: row;
-  gap: 15px;
+  gap: 12px;
+}
+.main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul li {
+  width: 250px;
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul li a {
   color: white;

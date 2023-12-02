@@ -16,13 +16,15 @@
             <div class="product-hidden-links">
                 <ul>
                     <li>
-                        <a href="">Compartilhar</a>
+                        <img src="img/main/product/share.svg" alt="share">
+                        <a href="#">Compartilhar</a>
                     </li>
                     <li>
-                        <a href="">Compare</a>
+                        <img src="img/main/product/compare.svg" alt="compare">
+                        <a href="#">Compare</a>
                     </li>
                     <li>
-                        <a href="">Gostei</a>
+                        <img src="img/main/product/heart.svg" alt="heart"><a href="#">Gostei</a>
                     </li>
                 </ul>
             </div>
