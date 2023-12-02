@@ -61,21 +61,9 @@
             </div>
         </div>
 
-        {{-- <div class="section-product-main">
-
-            <h1>Outros Produtos</h1>
-
-            <div class="section-product">
-                @if (!empty($produtos))
-                    @include('site.components.product')
-                @else
-                    <p>Nenhum produto disponível.</p>
-                @endif
-            </div>
-        </div> --}}
         <div class="section-product-main">
             <h1>Outros Produtos</h1>
-        
+
             @if ($mostrarProdutos)
                 <div class="section-product">
                     @if (!empty($produtos))

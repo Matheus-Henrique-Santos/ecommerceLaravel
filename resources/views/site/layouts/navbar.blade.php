@@ -1,8 +1,10 @@
 <nav>
 
     <div class="logo">
-        <img src="img/navbar/logo.svg">
-        <h1>Furniture</h1>
+        <a href="{{ route('site.index') }}">
+            <img src="img/navbar/logo.svg">
+            <h1>Furniture</h1>
+        </a>
     </div>
 
     <div class="links">

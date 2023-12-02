@@ -8,7 +8,7 @@ class PrincipalController extends Controller
 {
     public function principal()
     {
-        $mostrarProdutos = false;
+        $mostrarProdutos = true;
 
         $produtos = [
             ['nome' => 'Celular 1', 'descricao' => 'Smartphone 1', 'valor_com_desconto' => 300, 'valor_sem_desconto' => 350, 'imagem' => 'img/main/product/product-1.svg'],

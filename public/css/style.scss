@@ -1,28 +1,28 @@
 //use a EXTENSAO LIVE SERVER COMPILER SCSS
 
-// $phone: 393px; 
-// $phone: 500px; 
-// $phonel: 768px; 
-// $tablet: 996px; 
-// $notebook: 1024px; 
-// $notebookl: 1366px; 
-// $desktop: 1440px; 
+// $phone: 393px;
+// $phone: 500px;
+// $phonel: 768px;
+// $tablet: 996px;
+// $notebook: 1024px;
+// $notebookl: 1366px;
+// $desktop: 1440px;
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Roboto:wght@100;300;400&display=swap");
 
 @mixin sizeView {
     width: 1200px;
 }
 
-
-
 :root {
     --cor-primaria: #b88e2f;
     --cor-secundaria: #fff3e3;
     --primary-color: #f9532d;
-    --primary-dark: #1F252E;
+    --primary-dark: #1f252e;
     --font-logo: "Montserrat", sans-serif;
+    --font-links: "Outfit", sans-serif;
     --font-content: "Poppins", sans-serif;
 }
 
@@ -47,10 +47,11 @@ nav {
     position: fixed;
     width: 100vw;
     display: flex;
+    padding: 10px 10px 10px 10px;
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.459);
+    box-shadow: 0px 3px 39px rgba(0, 0, 0, 0.24);
 
     .logo {
         margin: 10px;
@@ -58,6 +59,13 @@ nav {
         justify-content: center;
         align-items: center;
         gap: 5px;
+        a {
+            text-decoration: none;
+            display: flex;
+            gap: 5px;
+            color: black;
+            transition: 0.3s;
+        }
         img {
             width: 50px;
         }
@@ -67,12 +75,26 @@ nav {
         }
     }
 
-    .links ul {
+    ul {
+        font-family: var(--font-links);
         list-style: none;
         display: flex;
         flex-direction: row;
         gap: 30px;
         text-decoration: none;
+        li {
+            a {
+                cursor: pointer;
+                color: black;
+                font-size: 1.1rem;
+                font-weight: bold;
+                text-decoration: none;
+                transition: 0.3s;
+            }
+            a:hover {
+                color: var(--primary-color);
+            }
+        }
     }
 
     .icons-nav {
@@ -203,11 +225,12 @@ nav {
                 transition: 0.3s;
 
                 img {
+                    height: 400px;
                     border-radius: 10px;
                 }
 
                 h3 {
-                    margin-top: 5px;
+                    margin-top: 15px;
                 }
                 h3:hover {
                     background-color: #b88e2f;
@@ -215,36 +238,89 @@ nav {
             }
         }
     }
-    .section-product-main{
+    .section-product-main {
+        max-width: 1200px;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
         text-align: center;
         display: flex;
         flex-direction: column;
-        .section-product{
+        .section-product {
             display: flex;
             flex-direction: row;
             gap: 30px;
-            .product-box{
-                width: 250px;
-                height: auto;
-                
-                border: 1px solid black;
-                img{
-                    height: 200px;
-                    z-index: -1;
-                    border: 1px solid black;
-                   
-                }
-                img:hover{
+            .product-box {
+                position: relative;
+                width: 300px;
+                margin: 10px;
 
-                    background-color: #0000005a;
+                .product-description {
+                    width: 100%;
+                    border: 1px solid rgba(0, 0, 0, 0.692);
+                    padding: 10px;
+                    box-sizing: border-box;
+
+                    h1,
+                    h3 {
+                        margin: 0;
+                    }
+
+                    img {
+                        max-width: 100%;
+                        height: auto;
+                    }
+                }
+
+                .product-hidden {
+
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    padding: 20px;
+                    box-sizing: border-box;
+                    display: none;
+                    z-index: 1;
+                    overflow: hidden;
+                    height: 100%;
+                    transition: opacity 0.3s ease;
+
+                    .product-hidden-content{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        margin-top: 60%;
+                        gap: 20px;
+                        .product-hidden-links{
+                            display: flex;
+                            justify-content: center;
+
+                            ul{
+                                display: flex;
+                                justify-content: center;
+                                flex-direction: row;
+                                gap: 15px;
+                                li{
+                                    a{
+                                        color: white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
                 }
             }
-            .product-box:hover{
-                cursor: pointer;
-                background-color: #0000005a;
+
+            .product-box:hover .product-hidden {
+                display: block;
+                opacity: 1;
             }
         }
-
     }
 }
 // footer
@@ -277,24 +353,21 @@ footer {
 }
 
 @media (max-width: 1024px) {
-    
     .header-home {
-        .square-home{
+        .square-home {
             margin-top: 50px;
             gap: 0px;
-            .square-home-content{
+            .square-home-content {
                 padding: 0px;
-                .title-home{
+                .title-home {
                     display: flex;
                     flex-direction: column;
                     gap: -30;
                 }
-                p{
+                p {
                     font-size: 1rem;
                 }
-
             }
         }
     }
-
 }
