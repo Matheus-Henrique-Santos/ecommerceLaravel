@@ -154,7 +154,6 @@ nav .icons-nav span {
   background-color: rgba(184, 143, 47, 0.7529411765);
 }
 .header-home .square-home .square-home-btn button:active {
-  border: 1px solid rgba(0, 0, 0, 0.205);
   background-color: white;
   color: black;
 }
@@ -219,14 +218,14 @@ nav .icons-nav span {
 }
 .main-home .section-product-main .section-product .product-box {
   position: relative;
-  width: 300px;
-  margin: 10px;
+  width: 287px;
 }
 .main-home .section-product-main .section-product .product-box .product-description {
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.692);
-  padding: 10px;
-  box-sizing: border-box;
+  background-color: #8e8e8f;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-bottom: 20px;
 }
 .main-home .section-product-main .section-product .product-box .product-description h1,
 .main-home .section-product-main .section-product .product-box .product-description h3 {
@@ -237,6 +236,7 @@ nav .icons-nav span {
   height: auto;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden {
+  border-radius: 10px;
   position: absolute;
   top: 0;
   left: 0;
@@ -244,9 +244,9 @@ nav .icons-nav span {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 20px;
   box-sizing: border-box;
   display: none;
+  padding: 10px;
   z-index: 1;
   overflow: hidden;
   height: 100%;
@@ -259,26 +259,61 @@ nav .icons-nav span {
   margin-top: 55%;
   gap: 20px;
 }
+.main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content button {
+  cursor: pointer;
+  font-family: var(--font-content);
+  border: none;
+  background-color: white;
+  font-weight: bold;
+  color: var(--cor-primaria);
+  font-size: 0.85rem;
+  padding: 20px 25px;
+  transition: 0.3s;
+}
+.main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content button:hover {
+  color: black;
+  background-color: rgb(184, 181, 174);
+}
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links {
   display: flex;
   justify-content: center;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul {
-  border: 1px solid white;
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: row;
-  gap: 12px;
+  gap: 5px;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul li {
-  width: 250px;
-  background-color: gray;
+  border-radius: 10px;
+  width: 350px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 3px;
+  justify-content: center;
 }
 .main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul li a {
+  border-radius: 10px;
+  padding: 4px 4px 4px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+  text-decoration: none;
+  font-family: var(--font-links);
+  font-weight: bold;
+  font-size: 0.85rem;
   color: white;
+  transition: 0.3s;
+}
+.main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul li a img {
+  width: 15px;
+}
+.main-home .section-product-main .section-product .product-box .product-hidden .product-hidden-content .product-hidden-links ul li a:hover {
+  text-decoration: underline;
 }
 .main-home .section-product-main .section-product .product-box:hover .product-hidden {
   display: block;

@@ -181,7 +181,7 @@ nav {
                 background-color: #b88f2fc0;
             }
             button:active {
-                border: 1px solid rgba(0, 0, 0, 0.205);
+                // border: 1px solid rgba(0, 0, 0, 0.205);
                 background-color: white;
                 color: black;
             }
@@ -252,15 +252,14 @@ nav {
             gap: 30px;
             .product-box {
                 position: relative;
-                width: 300px;
-                margin: 10px;
+                width: 287px;
 
                 .product-description {
                     width: 100%;
-                    border: 1px solid rgba(0, 0, 0, 0.692);
-                    padding: 10px;
-                    box-sizing: border-box;
-
+                    background-color: #8e8e8f;
+                    border: 1px solid black;
+                    border-radius: 10px;
+                    padding-bottom: 20px;
                     h1,
                     h3 {
                         margin: 0;
@@ -273,7 +272,7 @@ nav {
                 }
 
                 .product-hidden {
-
+                    border-radius: 10px;
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -281,45 +280,86 @@ nav {
                     height: 100%;
                     background: rgba(0, 0, 0, 0.5);
                     color: white;
-                    padding: 20px;
                     box-sizing: border-box;
                     display: none;
+                    padding: 10px;
                     z-index: 1;
                     overflow: hidden;
                     height: 100%;
                     transition: opacity 0.3s ease;
 
-                    .product-hidden-content{
+                    .product-hidden-content {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         margin-top: 55%;
                         gap: 20px;
-                        .product-hidden-links{
+                        button {
+                            cursor: pointer;
+                            font-family: var(--font-content);
+                            border: none;
+                            background-color: white;
+                            font-weight: bold;
+                            color: var(--cor-primaria);
+                            font-size: 0.85rem;
+                            padding: 20px 25px;
+                            transition: .3s;
+                        }
+                        button:hover {
+                            color: black;
+                            background-color: rgb(184, 181, 174);
+                        }
+                        button:active {
+                            color: #bdbdbd;
+                        }
+                        .product-hidden-links {
                             display: flex;
                             justify-content: center;
 
-                            ul{
-                                border: 1px solid white;
+                            ul {
+                                width: 100%;
                                 display: flex;
                                 justify-content: center;
                                 flex-direction: row;
-                                gap: 12px;
-                                li{
-                                    width: 250px;
-                                    background-color: gray;
+                                gap: 5px;
+                                li {
+                                    border-radius: 10px;
+                                    width: 350px;
                                     display: flex;
                                     flex-direction: row;
+                                    // border: 1px solid white;
+                                    align-items: center;
                                     gap: 3px;
-                                    a{
+                                    justify-content: center;
+                                    a {
+                                        border-radius: 10px;
+                                        padding: 4px 4px 4px 4px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        flex-direction: row;
+                                        gap: 5px;
+                                        // background-color: var(--cor-primaria);
+                                        text-decoration: none;
+                                        font-family: var(--font-links);
+                                        font-weight: bold;
+                                        font-size: 0.85rem;
                                         color: white;
+                                        img {
+                                            width: 15px;
+                                        }
+                                        transition: .3s;
+                                    }
+                                    a:hover{
+                                        text-decoration: underline;
+                                    }
+                                    a:active{
+                                        color: #a3a1a1;
                                     }
                                 }
                             }
                         }
                     }
-
-
                 }
             }
 
