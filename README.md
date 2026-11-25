@@ -1,66 +1,77 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ecommerce Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![CI](https://github.com/Matheus-Henrique-Santos/ecommerceLaravel/actions/workflows/ci.yml/badge.svg)](https://github.com/Matheus-Henrique-Santos/ecommerceLaravel/actions/workflows/ci.yml)
 
-## About Laravel
+Loja virtual construída com Laravel e Livewire, pensada como um projeto de referência:
+domínio de e-commerce completo (catálogo, carrinho, checkout, pagamento, cupons e API),
+com arquitetura simples de manter, testes automatizados e pipeline de CI.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O andamento está em [ROADMAP.md](ROADMAP.md).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Camada        | Tecnologia                         |
+|---------------|------------------------------------|
+| Linguagem     | PHP 8.3+                           |
+| Framework     | Laravel 13                         |
+| UI reativa    | Livewire + Blade                   |
+| Banco         | PostgreSQL 16 (SQLite em memória nos testes locais) |
+| Testes        | Pest (feature, unit e arquitetura) |
+| Estilo        | Laravel Pint (preset `laravel`)    |
+| CI            | GitHub Actions                     |
 
-## Learning Laravel
+## Como rodar localmente
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Pré-requisitos: PHP 8.3+ com `pdo_pgsql`, Composer, Node 20+ e um PostgreSQL acessível.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+git clone https://github.com/Matheus-Henrique-Santos/ecommerceLaravel.git
+cd ecommerceLaravel
+composer install
+cp .env.example .env          # ajuste DB_* para o seu Postgres
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+A aplicação fica disponível em `http://localhost:8000`.
 
-## Laravel Sponsors
+## Testes e qualidade
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+php artisan test        # suíte Pest (usa SQLite em memória por padrão)
+composer lint           # aplica o Pint
+composer lint:check     # só verifica o estilo, como no CI
+```
 
-### Premium Partners
+O CI roda em todo push e pull request para a `main`:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- **Pint** em modo `--test` (falha se houver arquivo fora do padrão);
+- **Pest** contra um PostgreSQL 16 real, em PHP 8.3 e 8.4, após rodar as migrations.
 
-## Contributing
+## Estrutura
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+app/Http/Controllers   controllers finos (single action quando possível)
+resources/views/site   layout e páginas públicas da loja
+resources/views/errors página 404 no layout da loja
+routes/web.php         rotas públicas (páginas estáticas via Route::view)
+tests/Feature          testes HTTP das páginas
+tests/Unit             testes unitários e regras de arquitetura (Pest arch)
+```
 
-## Code of Conduct
+## Decisões técnicas
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Esqueleto novo em vez de upgrade incremental (10 → 13):** o projeto tinha pouco código de domínio,
+  então recriar sobre o esqueleto atual (bootstrap enxuto em `bootstrap/app.php`, sem `Kernel`s e
+  providers legados) foi mais barato e deixou a base sem resíduos das versões antigas.
+- **PostgreSQL no CI, SQLite nos testes locais:** a suíte roda rápido sem dependências na máquina do
+  desenvolvedor, enquanto o CI garante compatibilidade com o banco de produção.
+- **Páginas estáticas com `Route::view`:** controllers que só retornavam uma view foram removidos;
+  controllers voltam a existir quando houver lógica real.
+- **Regras de arquitetura como teste:** o Pest `arch()` impede `dd()`/`dump()` esquecidos e mantém a
+  convenção dos controllers.
 
-## Security Vulnerabilities
+## Licença
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
