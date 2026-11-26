@@ -30,7 +30,7 @@ cd ecommerceLaravel
 composer install
 cp .env.example .env          # ajuste DB_* para o seu Postgres
 php artisan key:generate
-php artisan migrate
+php artisan migrate --seed   # cria o catálogo de demonstração
 php artisan serve
 ```
 
@@ -53,6 +53,8 @@ O CI roda em todo push e pull request para a `main`:
 
 ```
 app/Http/Controllers   controllers finos (single action quando possível)
+app/Models             Category e Product (+ concerns reutilizáveis em app/Models/Concerns)
+database/seeders       CatalogSeeder idempotente com dados de demonstração
 resources/views/site   layout e páginas públicas da loja
 resources/views/errors página 404 no layout da loja
 routes/web.php         rotas públicas (páginas estáticas via Route::view)
@@ -69,6 +71,15 @@ tests/Unit             testes unitários e regras de arquitetura (Pest arch)
   desenvolvedor, enquanto o CI garante compatibilidade com o banco de produção.
 - **Páginas estáticas com `Route::view`:** controllers que só retornavam uma view foram removidos;
   controllers voltam a existir quando houver lógica real.
+- **Dinheiro em centavos (`price_cents` inteiro):** evita erro de arredondamento de ponto flutuante;
+  a formatação em BRL fica no model até o value object `Money` chegar com o carrinho.
+- **Slug estável e único:** gerado a partir do nome na criação (com sufixo `-2`, `-3`… em colisões,
+  considerando registros na lixeira, já que o índice único também os cobre) e não muda quando o nome
+  é editado, para não quebrar URLs públicas. O model resolve route binding pelo slug.
+- **Catálogo com soft delete e FK `restrict`:** produtos saem da vitrine sem perder histórico, e o
+  banco impede apagar uma categoria que ainda tem produtos.
+- **Scopes do domínio:** `Product::active()` já exclui produtos de categorias inativas, então a
+  vitrine não precisa repetir essa regra; `inCategory()` aceita model, id ou slug.
 - **Regras de arquitetura como teste:** o Pest `arch()` impede `dd()`/`dump()` esquecidos e mantém a
   convenção dos controllers.
 

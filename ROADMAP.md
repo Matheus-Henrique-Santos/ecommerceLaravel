@@ -3,7 +3,7 @@
 Entregas pequenas e incrementais; cada item fecha com testes e CI verde.
 
 - [x] 1. Modernização: Laravel 13 + PHP 8.3, PostgreSQL, Pest, Pint, CI, README/ROADMAP, remoção de código morto
-- [ ] 2. Catálogo: `Category`/`Product` (preço em centavos, slug, SKU, estoque), factories e seeders
+- [x] 2. Catálogo: `Category`/`Product` (preço em centavos, slug, SKU, estoque), factories e seeders
 - [ ] 3. Vitrine Livewire: listagem paginada, filtro por categoria, busca, ordenação e página de produto
 - [ ] 4. Autenticação + papéis (admin/cliente) com Policies
 - [ ] 5. Admin: CRUD de produtos (Livewire Form Objects, upload de imagem)
