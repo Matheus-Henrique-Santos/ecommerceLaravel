@@ -362,3 +362,19 @@ footer .color-gray-text .footer-title {
     font-size: 1rem;
   }
 }/*# sourceMappingURL=style.css.map */
+/* Storefront catalog (/shop) and product page */
+.shop, .product-page { max-width: 1140px; margin: 0 auto; padding: 32px 16px; }
+.catalog-filters { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin-bottom: 16px; }
+.catalog-filters label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.catalog-filters input, .catalog-filters select, .catalog-filters button { padding: 8px 12px; border: 1px solid #d8d8d8; border-radius: 4px; font: inherit; }
+.catalog-count.is-loading { opacity: .5; }
+.catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; margin: 16px 0 32px; }
+.catalog-card { display: flex; flex-direction: column; gap: 6px; padding: 16px; background: #f4f5f7; }
+.catalog-card a { color: inherit; text-decoration: none; }
+.catalog-card img { width: 100%; }
+.catalog-card h2 { font-size: 18px; margin: 8px 0 0; }
+.catalog-badge, .product-stock.is-out { color: #e97171; font-weight: 600; }
+.product-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 24px; }
+.product-detail img { width: 100%; }
+.product-price { display: block; font-size: 28px; margin: 12px 0; }
+.product-sku { color: #898989; font-size: 14px; }

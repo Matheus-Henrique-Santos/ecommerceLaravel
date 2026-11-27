@@ -53,12 +53,15 @@ O CI roda em todo push e pull request para a `main`:
 
 ```
 app/Http/Controllers   controllers finos (single action quando possível)
+app/Enums              enums do domínio (ex.: ProductSort, valores estáveis na query string)
+app/Livewire           componentes Livewire (Shop\ProductCatalog: vitrine com filtros)
 app/Models             Category e Product (+ concerns reutilizáveis em app/Models/Concerns)
 database/seeders       CatalogSeeder idempotente com dados de demonstração
-resources/views/site   layout e páginas públicas da loja
+resources/views/site   layout e páginas públicas da loja (shop, página de produto)
+resources/views/livewire views dos componentes Livewire
 resources/views/errors página 404 no layout da loja
 routes/web.php         rotas públicas (páginas estáticas via Route::view)
-tests/Feature          testes HTTP das páginas
+tests/Feature          testes HTTP, de domínio e de componentes Livewire
 tests/Unit             testes unitários e regras de arquitetura (Pest arch)
 ```
 
@@ -80,6 +83,15 @@ tests/Unit             testes unitários e regras de arquitetura (Pest arch)
   banco impede apagar uma categoria que ainda tem produtos.
 - **Scopes do domínio:** `Product::active()` já exclui produtos de categorias inativas, então a
   vitrine não precisa repetir essa regra; `inCategory()` aceita model, id ou slug.
+- **Estado da vitrine na URL:** busca, categoria e ordenação ficam em `?busca=&categoria=&ordem=`
+  (`#[Url]` do Livewire), então qualquer filtro pode ser compartilhado por link e funciona no primeiro
+  render sem JavaScript. Valores desconhecidos de `ordem` caem no padrão (`ProductSort::fromQuery`) em
+  vez de gerar erro, e mudar qualquer filtro volta para a página 1.
+- **Busca portátil e segura:** `Product::search()` compara `lower(coluna) LIKE ? ESCAPE '!'` em nome e
+  SKU, com os curingas `%` e `_` digitados pelo usuário escapados; o mesmo SQL vale para PostgreSQL e
+  SQLite, e a ordenação sempre desempata por `id` para a paginação ser determinística.
+- **Página de produto só para itens visíveis:** `/produto/{slug}` resolve pelo scope `active()`, então
+  produto inativo, de categoria inativa ou na lixeira responde 404 em vez de vazar pela URL.
 - **Regras de arquitetura como teste:** o Pest `arch()` impede `dd()`/`dump()` esquecidos e mantém a
   convenção dos controllers.
 
