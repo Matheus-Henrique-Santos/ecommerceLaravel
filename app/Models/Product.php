@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ProductSort;
 use App\Models\Concerns\HasUniqueSlug;
+use App\ValueObjects\Money;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -109,12 +110,17 @@ class Product extends Model
         return $this->stock >= $quantity;
     }
 
+    public function unitPrice(): Money
+    {
+        return Money::fromCents($this->price_cents);
+    }
+
     /**
      * Price formatted in Brazilian Real, e.g. "R$ 1.299,90".
      */
     protected function formattedPrice(): Attribute
     {
-        return Attribute::get(fn (): string => 'R$ '.number_format($this->price_cents / 100, 2, ',', '.'));
+        return Attribute::get(fn (): string => $this->unitPrice()->format());
     }
 
     /**
