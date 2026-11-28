@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShowProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('site.index');
@@ -33,4 +35,14 @@ Route::middleware(['auth', 'can:access-admin'])
     ->name('admin.')
     ->group(function () {
         Route::get('/', DashboardController::class)->name('dashboard');
+
+        Route::get('/produtos', [ProductController::class, 'index'])
+            ->can('viewAny', Product::class)
+            ->name('products.index');
+        Route::get('/produtos/novo', [ProductController::class, 'create'])
+            ->can('create', Product::class)
+            ->name('products.create');
+        Route::get('/produtos/{product}/editar', [ProductController::class, 'edit'])
+            ->can('update', 'product')
+            ->name('products.edit');
     });

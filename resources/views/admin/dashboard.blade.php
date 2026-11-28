@@ -13,5 +13,7 @@
         <div><dt>Sem estoque</dt><dd>{{ $outOfStock }}</dd></div>
         <div><dt>Categorias</dt><dd>{{ $categories }}</dd></div>
     </dl>
+
+    <p><a class="admin-button" href="{{ route('admin.products.index') }}">Gerenciar produtos</a></p>
 </main>
 @endsection

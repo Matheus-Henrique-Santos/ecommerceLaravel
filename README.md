@@ -31,13 +31,14 @@ composer install
 cp .env.example .env          # ajuste DB_* para o seu Postgres
 php artisan key:generate
 php artisan migrate --seed   # cria o catálogo e as contas de demonstração
+php artisan storage:link     # expõe as imagens enviadas pelo painel em /storage
 php artisan serve
 ```
 
 A aplicação fica disponível em `http://localhost:8000`.
 
-Contas de demonstração (senha `password`): `admin@example.com` (acessa `/admin`) e
-`cliente@example.com`. Para dar acesso administrativo a uma conta existente:
+Contas de demonstração (senha `password`): `admin@example.com` (acessa `/admin`, onde fica o
+cadastro de produtos em `/admin/produtos`) e `cliente@example.com`. Para dar acesso administrativo a uma conta existente:
 
 ```bash
 php artisan user:promote email@exemplo.com
@@ -63,12 +64,14 @@ app/Http/Controllers   controllers finos (single action quando possível)
 app/Enums              enums do domínio (ProductSort na query string, Role do usuário)
 app/Http/Requests      validação e regras de entrada (login com rate limit, cadastro)
 app/Policies           autorização do back office (ProductPolicy)
-app/Livewire           componentes Livewire (Shop\ProductCatalog: vitrine com filtros)
+app/Livewire           componentes Livewire (Shop\ProductCatalog: vitrine; Admin\Products: tabela e editor)
+app/Livewire/Forms     Form Objects do Livewire (ProductForm: validação e persistência do produto)
+app/Support            conversões de entrada sem dependência de framework (PriceInput)
 app/Models             Category e Product (+ concerns reutilizáveis em app/Models/Concerns)
 database/seeders       CatalogSeeder idempotente com dados de demonstração
 resources/views/site   layout e páginas públicas da loja (shop, página de produto)
 resources/views/auth   login e cadastro
-resources/views/admin  painel administrativo
+resources/views/admin  painel administrativo e páginas de produtos
 resources/views/livewire views dos componentes Livewire
 resources/views/errors página 404 no layout da loja
 routes/web.php         rotas públicas, de autenticação e o grupo /admin
@@ -114,6 +117,21 @@ tests/Unit             testes unitários e regras de arquitetura (Pest arch)
 - **Autorização em duas camadas:** o Gate `access-admin` protege o grupo `/admin` via middleware `can`
   (visitante vai para o login e volta para a página pedida; cliente recebe 403), e a `ProductPolicy`
   define as permissões finas do catálogo que o CRUD administrativo vai usar.
+- **CRUD do back office com Livewire Form Object:** criação e edição usam o mesmo `ProductForm`, que
+  guarda o texto digitado (preço como `1.299,90`, estoque como string) e só converte para valores do
+  domínio depois de validar. O SKU é normalizado antes da regra `unique` (que também considera itens na
+  lixeira, como o índice do banco), e `image_path` fica fora do mass assignment.
+- **Autorização em cada ação Livewire:** as rotas `/admin/produtos` usam `can` com a `ProductPolicy`, mas
+  ações Livewire chegam em outra requisição; por isso `mount`, `save`, `toggleActive` e `delete`
+  chamam `Gate::authorize` de novo (um admin rebaixado no meio da sessão recebe 403 na próxima ação).
+- **Upload de imagem sem arquivos órfãos:** JPG, PNG ou WebP de até 2 MB, gravados no disco `public`
+  em `products/`. Se salvar o produto falhar, o arquivo novo é apagado; a imagem anterior só é removida
+  depois que a nova foi persistida. Produtos sem imagem usam um placeholder (`Product::image_url`).
+- **Preço digitado em notação brasileira:** `App\Support\PriceInput` aceita `1299`, `1.299,90` e
+  `1299.90`, rejeita formatos ambíguos (três casas decimais, separadores trocados) e limita o valor ao
+  que cabe em `price_cents`. Vira parte do value object `Money` quando o carrinho chegar.
+- **Desativar ≠ remover:** "Desativar" tira o produto da vitrine e mantém o cadastro editável;
+  "Remover" faz soft delete, preservando histórico para pedidos futuros.
 - **Regras de arquitetura como teste:** o Pest `arch()` impede `dd()`/`dump()` esquecidos e mantém a
   convenção dos controllers.
 

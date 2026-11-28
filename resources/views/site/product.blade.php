@@ -13,7 +13,7 @@
     </nav>
 
     <article class="product-detail">
-        <img src="{{ asset('img/main/product/product-1.svg') }}" alt="{{ $product->name }}">
+        <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
 
         <div>
             <h1>{{ $product->name }}</h1>

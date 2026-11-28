@@ -37,7 +37,7 @@
         @foreach ($products as $product)
             <article class="catalog-card" wire:key="product-{{ $product->id }}">
                 <a href="{{ route('site.product', $product->slug) }}">
-                    <img src="{{ asset('img/main/product/product-1.svg') }}" alt="{{ $product->name }}">
+                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
                     <h2>{{ $product->name }}</h2>
                 </a>
                 <small>{{ $product->category->name }}</small>

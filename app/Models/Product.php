@@ -13,13 +13,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+/**
+ * `image_path` is intentionally not fillable: it is only set by the back
+ * office after the upload has been validated and stored.
+ */
 #[Fillable(['category_id', 'name', 'slug', 'sku', 'description', 'price_cents', 'stock', 'is_active'])]
 class Product extends Model
 {
     /** @use HasFactory<ProductFactory> */
     use HasFactory, HasUniqueSlug, SoftDeletes;
+
+    public const IMAGE_DISK = 'public';
+
+    public const IMAGE_DIRECTORY = 'products';
+
+    public const PLACEHOLDER_IMAGE = 'img/main/product/product-1.svg';
 
     /**
      * @return BelongsTo<Category, $this>
@@ -104,6 +115,16 @@ class Product extends Model
     protected function formattedPrice(): Attribute
     {
         return Attribute::get(fn (): string => 'R$ '.number_format($this->price_cents / 100, 2, ',', '.'));
+    }
+
+    /**
+     * Public URL of the uploaded image, falling back to the catalog placeholder.
+     */
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::get(fn (): string => $this->image_path
+            ? Storage::disk(self::IMAGE_DISK)->url($this->image_path)
+            : asset(self::PLACEHOLDER_IMAGE));
     }
 
     /**
