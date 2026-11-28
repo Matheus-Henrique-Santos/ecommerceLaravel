@@ -26,6 +26,8 @@
                 <p class="product-stock is-out">Esgotado</p>
             @endif
 
+            <livewire:cart.add-to-cart :product="$product" />
+
             @if ($product->description)
                 <p class="product-description">{{ $product->description }}</p>
             @endif

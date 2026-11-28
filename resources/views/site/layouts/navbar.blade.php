@@ -52,9 +52,7 @@
             <img src="img/navbar/search.svg" alt="search">
         </span>
 
-        <span>
-            <img src="img/navbar/shopping_cart.svg" alt="shopping">
-        </span>
+        <livewire:cart.cart-counter />
 
     </div>
 

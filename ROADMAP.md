@@ -7,7 +7,7 @@ Entregas pequenas e incrementais; cada item fecha com testes e CI verde.
 - [x] 3. Vitrine Livewire: listagem paginada, filtro por categoria, busca, ordenação e página de produto
 - [x] 4. Autenticação + papéis (admin/cliente) com Policies
 - [x] 5. Admin: CRUD de produtos (Livewire Form Objects, upload de imagem)
-- [ ] 6. Carrinho: `CartService` (sessão para visitante, banco para logado, merge no login) e value object `Money`
+- [x] 6. Carrinho: `CartService` (sessão para visitante, banco para logado, merge no login) e value object `Money`
 - [ ] 7. Checkout: `Order`/`OrderItem` em transação, snapshot de preço, lock de estoque, status como enum
 - [ ] 8. Pagamento: contrato `PaymentGateway` + driver fake + webhook idempotente (HMAC) processado em fila
 - [ ] 9. Cupons (percentual/fixo, validade, valor mínimo)

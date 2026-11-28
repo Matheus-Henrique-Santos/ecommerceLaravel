@@ -64,10 +64,13 @@ app/Http/Controllers   controllers finos (single action quando possível)
 app/Enums              enums do domínio (ProductSort na query string, Role do usuário)
 app/Http/Requests      validação e regras de entrada (login com rate limit, cadastro)
 app/Policies           autorização do back office (ProductPolicy)
-app/Livewire           componentes Livewire (Shop\ProductCatalog: vitrine; Admin\Products: tabela e editor)
+app/Cart               CartService, stores do carrinho (sessão e banco), CartLine e CartException
+app/ValueObjects       value objects imutáveis (Money: centavos, soma e formatação em BRL)
+app/Listeners          MergeGuestCart: junta o carrinho do visitante ao do cliente no login
+app/Livewire           componentes Livewire (Shop\ProductCatalog: vitrine; Cart: botão, contador e página do carrinho; Admin\Products: tabela e editor)
 app/Livewire/Forms     Form Objects do Livewire (ProductForm: validação e persistência do produto)
 app/Support            conversões de entrada sem dependência de framework (PriceInput)
-app/Models             Category e Product (+ concerns reutilizáveis em app/Models/Concerns)
+app/Models             Category, Product, Cart e CartItem (+ concerns reutilizáveis em app/Models/Concerns)
 database/seeders       CatalogSeeder idempotente com dados de demonstração
 resources/views/site   layout e páginas públicas da loja (shop, página de produto)
 resources/views/auth   login e cadastro
@@ -89,7 +92,8 @@ tests/Unit             testes unitários e regras de arquitetura (Pest arch)
 - **Páginas estáticas com `Route::view`:** controllers que só retornavam uma view foram removidos;
   controllers voltam a existir quando houver lógica real.
 - **Dinheiro em centavos (`price_cents` inteiro):** evita erro de arredondamento de ponto flutuante;
-  a formatação em BRL fica no model até o value object `Money` chegar com o carrinho.
+  contas e formatação em BRL passam pelo value object imutável `App\ValueObjects\Money`, que rejeita
+  valores negativos (`Product::unitPrice()` devolve o preço já como `Money`).
 - **Slug estável e único:** gerado a partir do nome na criação (com sufixo `-2`, `-3`… em colisões,
   considerando registros na lixeira, já que o índice único também os cobre) e não muda quando o nome
   é editado, para não quebrar URLs públicas. O model resolve route binding pelo slug.
@@ -129,9 +133,24 @@ tests/Unit             testes unitários e regras de arquitetura (Pest arch)
   depois que a nova foi persistida. Produtos sem imagem usam um placeholder (`Product::image_url`).
 - **Preço digitado em notação brasileira:** `App\Support\PriceInput` aceita `1299`, `1.299,90` e
   `1299.90`, rejeita formatos ambíguos (três casas decimais, separadores trocados) e limita o valor ao
-  que cabe em `price_cents`. Vira parte do value object `Money` quando o carrinho chegar.
+  que cabe em `price_cents`.
 - **Desativar ≠ remover:** "Desativar" tira o produto da vitrine e mantém o cadastro editável;
   "Remover" faz soft delete, preservando histórico para pedidos futuros.
+- **Carrinho com storage por contexto:** `CartService` é o único ponto de entrada e escolhe o storage a
+  cada chamada: visitante usa a sessão (`SessionCartStore`), cliente logado usa as tabelas `carts` e
+  `cart_items` (`DatabaseCartStore`, um carrinho por usuário, item único por produto). Os stores guardam
+  só `produto → quantidade`; preço, disponibilidade e estoque são sempre relidos do catálogo, então o
+  carrinho nunca mostra preço desatualizado e itens desativados somem sozinhos. O preço só é congelado
+  no pedido (checkout).
+- **Regras de quantidade no domínio, não na tela:** adicionar ou alterar relê o produto do banco e
+  lança `CartException` (mensagem pronta para o usuário) se ele não estiver à venda, se a quantidade
+  passar do estoque ou do limite de 99 por item. Os componentes Livewire só exibem o erro.
+- **Merge do carrinho no login:** o listener `MergeGuestCart` (evento `Login`, que também dispara no
+  cadastro) soma as quantidades do visitante às já salvas para o cliente, limitando ao estoque e
+  descartando itens indisponíveis; o carrinho da sessão é esvaziado antes, então o merge nunca roda
+  duas vezes.
+- **Contador no header por evento:** `AddToCart` e a página do carrinho disparam `cart-updated`, e o
+  `CartCounter` do layout se atualiza sem recarregar a página.
 - **Regras de arquitetura como teste:** o Pest `arch()` impede `dd()`/`dump()` esquecidos e mantém a
   convenção dos controllers.
 
