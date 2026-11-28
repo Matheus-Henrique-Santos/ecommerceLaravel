@@ -378,3 +378,18 @@ footer .color-gray-text .footer-title {
 .product-detail img { width: 100%; }
 .product-price { display: block; font-size: 28px; margin: 12px 0; }
 .product-sku { color: #898989; font-size: 14px; }
+/* Authentication and back office */
+.auth-page, .admin-page { max-width: 1140px; margin: 0 auto; padding: 32px 16px; }
+.auth-page { max-width: 420px; }
+.auth-form { display: flex; flex-direction: column; gap: 12px; margin: 16px 0; }
+.auth-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.auth-form label.checkbox { flex-direction: row; align-items: center; gap: 8px; }
+.auth-form input[type="text"], .auth-form input[type="email"], .auth-form input[type="password"] { padding: 8px 12px; border: 1px solid #d8d8d8; border-radius: 4px; font: inherit; }
+.auth-form button { padding: 10px 16px; border: 0; border-radius: 4px; background: #b88e2f; color: #fff; font: inherit; cursor: pointer; }
+.form-error { margin: -8px 0 0; color: #e97171; font-size: 13px; }
+.account-menu { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+.account-menu form { display: inline; }
+.account-menu button { border: 0; background: none; font: inherit; cursor: pointer; text-decoration: underline; }
+.admin-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+.admin-stats div { padding: 16px; background: #f4f5f7; }
+.admin-stats dd { margin: 4px 0 0; font-size: 28px; font-weight: 600; }

@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+
+class RegisterController extends Controller
+{
+    public function create(): View
+    {
+        return view('auth.register');
+    }
+
+    /**
+     * Self-service sign-up always creates a customer; the role column is not
+     * mass assignable, so extra request fields cannot escalate privileges.
+     */
+    public function store(RegisterRequest $request): RedirectResponse
+    {
+        $user = User::create($request->validated());
+
+        event(new Registered($user));
+
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect()->route('site.index');
+    }
+}

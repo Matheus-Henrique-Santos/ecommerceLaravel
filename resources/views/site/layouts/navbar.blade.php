@@ -27,8 +27,21 @@
 
     <div class="icons-nav">
 
-        <span>
-            <img src="img/navbar/person.svg" alt="account">
+        <span class="account-menu">
+            <img src="{{ asset('img/navbar/person.svg') }}" alt="Minha conta">
+            @auth
+                <span>{{ auth()->user()->name }}</span>
+                @can('access-admin')
+                    <a href="{{ route('admin.dashboard') }}">Painel</a>
+                @endcan
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Sair</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">Entrar</a>
+                <a href="{{ route('register') }}">Cadastrar</a>
+            @endauth
         </span>
 
         <span>

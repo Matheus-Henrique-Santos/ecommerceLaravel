@@ -30,11 +30,18 @@ cd ecommerceLaravel
 composer install
 cp .env.example .env          # ajuste DB_* para o seu Postgres
 php artisan key:generate
-php artisan migrate --seed   # cria o catálogo de demonstração
+php artisan migrate --seed   # cria o catálogo e as contas de demonstração
 php artisan serve
 ```
 
 A aplicação fica disponível em `http://localhost:8000`.
+
+Contas de demonstração (senha `password`): `admin@example.com` (acessa `/admin`) e
+`cliente@example.com`. Para dar acesso administrativo a uma conta existente:
+
+```bash
+php artisan user:promote email@exemplo.com
+```
 
 ## Testes e qualidade
 
@@ -53,14 +60,18 @@ O CI roda em todo push e pull request para a `main`:
 
 ```
 app/Http/Controllers   controllers finos (single action quando possível)
-app/Enums              enums do domínio (ex.: ProductSort, valores estáveis na query string)
+app/Enums              enums do domínio (ProductSort na query string, Role do usuário)
+app/Http/Requests      validação e regras de entrada (login com rate limit, cadastro)
+app/Policies           autorização do back office (ProductPolicy)
 app/Livewire           componentes Livewire (Shop\ProductCatalog: vitrine com filtros)
 app/Models             Category e Product (+ concerns reutilizáveis em app/Models/Concerns)
 database/seeders       CatalogSeeder idempotente com dados de demonstração
 resources/views/site   layout e páginas públicas da loja (shop, página de produto)
+resources/views/auth   login e cadastro
+resources/views/admin  painel administrativo
 resources/views/livewire views dos componentes Livewire
 resources/views/errors página 404 no layout da loja
-routes/web.php         rotas públicas (páginas estáticas via Route::view)
+routes/web.php         rotas públicas, de autenticação e o grupo /admin
 tests/Feature          testes HTTP, de domínio e de componentes Livewire
 tests/Unit             testes unitários e regras de arquitetura (Pest arch)
 ```
@@ -92,6 +103,17 @@ tests/Unit             testes unitários e regras de arquitetura (Pest arch)
   SQLite, e a ordenação sempre desempata por `id` para a paginação ser determinística.
 - **Página de produto só para itens visíveis:** `/produto/{slug}` resolve pelo scope `active()`, então
   produto inativo, de categoria inativa ou na lixeira responde 404 em vez de vazar pela URL.
+- **Autenticação própria em vez de starter kit:** login, cadastro e logout cabem em dois controllers e
+  dois Form Requests, sem trazer scaffolding de UI que o projeto não usaria. O login regenera a sessão
+  (contra session fixation), o logout invalida sessão e token CSRF, e as tentativas são limitadas a 5
+  por combinação e-mail + IP; o cadastro também passa por `throttle`.
+- **Papéis como enum, fora do mass assignment:** `users.role` guarda o backed value de `App\Enums\Role`
+  (`admin`/`customer`, padrão `customer`). A coluna não é `fillable`, então um campo `role` injetado no
+  formulário de cadastro é ignorado; promover alguém exige `User::promoteToAdmin()` ou o comando
+  `user:promote`.
+- **Autorização em duas camadas:** o Gate `access-admin` protege o grupo `/admin` via middleware `can`
+  (visitante vai para o login e volta para a página pedida; cliente recebe 403), e a `ProductPolicy`
+  define as permissões finas do catálogo que o CRUD administrativo vai usar.
 - **Regras de arquitetura como teste:** o Pest `arch()` impede `dd()`/`dump()` esquecidos e mantém a
   convenção dos controllers.
 
